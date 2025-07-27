@@ -77,7 +77,7 @@ class _AudioScreenState extends State<AudioScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(_isRecording ? Icons.stop : Icons.mic),
+        child: Center(child: Icon(_isRecording ? Icons.stop : Icons.mic)),
         onPressed: () => _isRecording ? _stopRecording() : _startRecording(),
       ),
     );

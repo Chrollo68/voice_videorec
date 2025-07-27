@@ -70,8 +70,8 @@ class _VideoScreenState extends State<VideoScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.videocam),
         onPressed: _recordVideo,
+        child: const Icon(Icons.videocam),
       ),
     );
   }

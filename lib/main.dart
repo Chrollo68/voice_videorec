@@ -36,16 +36,24 @@ class _PermissionCheckScreenState extends State<PermissionCheckScreen> {
   }
 
   Future<void> _requestPermissions() async {
-    var mic = await Permission.microphone.request();
-    var cam = await Permission.camera.request();
-    if (!mounted) return;
-    if (mic.isGranted && cam.isGranted) {
+    final permissions = [
+      Permission.microphone,
+      Permission.camera,
+      Permission.audio,
+      Permission.videos,
+    ];
+    final statuses = await permissions.request();
+
+    final denied = statuses.entries.where((entry) => entry.value.isDenied);
+
+    if (denied.isNotEmpty) {
+      _showPermissionDialog();
+    } else {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const HomeScreen()),
       );
-    } else {
-      _showPermissionDialog();
     }
   }
 
